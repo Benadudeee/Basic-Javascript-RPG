@@ -40,5 +40,4 @@
 
 .damage-indicator{
     animation: 1s damage-disappear;
-    color: black;
 }
