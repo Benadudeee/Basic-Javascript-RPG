@@ -1,0 +1,6 @@
+Part 3: Optimization
+    TODO: Rehaul the Character and Enemy class (DONE) 
+    TODO: Rehaul the Skills class (DONE)
+    TODO: Rehaul the Equipment class 
+    TODO: Create Difficulties for the game (DONE)
+    

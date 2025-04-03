@@ -1,0 +1,17 @@
+This is from my old rpg from 2021. Oh! How the time flies! This is sorta copied
+from my old one, so you could check that out there
+
+Parts:
+*done* Part 1: Starter
+    *Basic battle system
+    *Random enemy gerneration
+    *Restart the game whenever you lose
+    *Basic attack system
+
+Part 2: A bit advanced
+    *done*Add skills, and heal
+    *done*Change attack equation
+    *done*Add a shop
+    *done* equipment: sword and armor
+
+
