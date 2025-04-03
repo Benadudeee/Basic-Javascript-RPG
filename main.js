@@ -116,33 +116,3 @@ class Main{
 
 const main = new Main()
 main.selectCharacter();
-
-
-// console.log("foo");
-
-// Testing if weapons work
-
-// 1. If other roles can't use weapons
-const sword = new Weapon(
-    {
-        name: "sword",
-        usedBy: ["rouge"],
-
-        multipliers: {
-            health: 1,
-            power: 1.05,
-            defense: 1,
-            energy: 1
-        },
-
-        effects: [
-
-        ]
-    }
-)
-
-const swordUser = new Player(getCharacterByRole("rouge"));
-const nonSwordUser = new Player(getCharacterByRole("mage"))
-
-// Should return player object and error object
-console.log(swordUser.equipWeapon(sword), nonSwordUser.equipWeapon(sword));

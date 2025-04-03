@@ -11,9 +11,6 @@ class Battle{
     constructor(){
         this.main;
         this.element;
-        // Get seperate pieces of HTML so we can update a component without updating
-        // all of them
-        this.components;
 
         this.player;
         this.enemy;
@@ -22,6 +19,8 @@ class Battle{
         this.isEnd = false;
 
         this.region = "plains";
+
+        this.playerEventActive = false; // If the player choose a move. Prevents spamming
     }
 
     init(main, element, player, difficulty){
@@ -32,14 +31,6 @@ class Battle{
         this.enemy = enemy;
         this.difficulty = difficulty;
         this.element = element;
-
-        this.components = {
-            playerUI: this.player.showStats(),
-            enemyUI: this.enemy.showStats(),
-
-            infoUI: `<section class="skill-information-container"> </section>`,
-        }
-
 
         this.renderUI();
     }
@@ -65,6 +56,10 @@ class Battle{
             damageIndicator.style.color = "red"
         }
 
+        if(type == "recharge"){
+            damageIndicator.style.color = "blue";
+        }
+
         damageIndicator.textContent = content;
         element.appendChild(damageIndicator);
 
@@ -77,15 +72,20 @@ class Battle{
     renderUI(){
         // this.element.innerHTML = this.player.showStats() + this.player.showSkills() + this.enemy.showStats();
         this.element.innerHTML = this.player.showStats() + `<div class="player-skills-container"> </div>` + this.enemy.showStats();
+        
         const playerSkills = document.querySelector(".player-skills-container");
-
         this.player.skills.forEach( skill => {
             const button = document.createElement("button");
             button.innerHTML = skill.name;
 
             button.addEventListener("click", (e) => {
                 // Wrap this into a function to reduce clutter
-                this.castSkillEvent(skill)
+                if(!this.playerEventActive){
+                    this.castSkillEvent(skill);
+
+                    this.playerEventActive = true;
+                }
+
             })
 
             // Plan to add info section
@@ -100,6 +100,7 @@ class Battle{
         rechargeBtn.innerHTML = "Recharge"
 
         rechargeBtn.addEventListener("click", (e) => {
+            this.playerEventActive = true;
             this.playerRecharge();
         });
 
@@ -157,7 +158,10 @@ class Battle{
         
         if(this.battleHasEnded()){
             this.end( () => this.main.selectCharacter());
+            return;
         }
+
+        // this.renderUI();
     }
     
     /**
@@ -173,8 +177,8 @@ class Battle{
         // Type Checker (When enemy can heal)
         this.showOutputIndicator(document.querySelector(".player-stats"), skillOutput.amount, skillOutput.type);
         await utils.wait(1000);
-
-        this.renderUI();
+        
+        this.playerEventActive = false;
     }
 
     /**
