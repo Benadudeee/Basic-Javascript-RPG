@@ -1,5 +1,8 @@
 import Enemy from "./enemy.js";
 import Player from "./player.js";
+import Effect from "./effects.js";
+
+import { effects, getEffectById } from "../data/effects.js";
 /**
  * ====== SKILLS ======
  * 
@@ -48,6 +51,7 @@ class Skill{
     // Takes the user, target and the difficulty and either heals of attacks
     execute(self, target, difficulty = null){
         let output; 
+        const appliedEffects = [];
 
         // If the skill has enought mana
         if(self instanceof Player){
@@ -76,7 +80,23 @@ class Skill{
             }
         }
 
-        return {type: this.type, name: this.name,  amount: output};
+        this.effects.forEach(eff => {
+            let chance = Math.random();
+
+            if(chance <= eff.chance){
+                const newEffect = new Effect(getEffectById(eff.status));
+                newEffect.turns = eff.turns;
+
+                console.log(newEffect);
+                appliedEffects.push(newEffect);
+            }
+        });
+
+        target.effects = appliedEffects;
+
+        console.log(appliedEffects);
+
+        return {type: this.type, name: this.name,  amount: output, effects: appliedEffects};
     }
 }
 

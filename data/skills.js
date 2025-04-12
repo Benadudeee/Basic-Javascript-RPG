@@ -8,7 +8,9 @@ const skills = [
         value: 10,
         cost: 0,
 
-        effects: []
+        effects: [
+            {status: "sample_effect", chance: 1, turns: 2}
+        ]
 
     },
     {
@@ -55,7 +57,7 @@ const skills = [
         cost: 8,
 
         effects: [
-            {status: "stunned", chance: 0.2}
+            {status: "stunned", chance: 0.2, turns: 1}
         ]
     },
     {

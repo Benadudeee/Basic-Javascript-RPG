@@ -11,7 +11,32 @@
 class Effect{
     constructor(data){
         this.name = data.name;
-        this.turns = data.turns;
+        this.turns;
+        this.type = data.type;
+        this.target;
+        this.properties = data.properties;
+
+        /**
+         * { health, power, defense, energy }
+         */
+        this.prevStats = {}
+    }
+
+    apply(){
+        let output = (this.type === "damage")? this.properties.damage : this.properties.regeneration;
+        
+        // console.log(output, this.properties.damage);
+        return output;
 
     }
+
+    savePrevStats(){
+        this.prevStats = {
+            health: this.target.health,
+            power: this.target.power,
+            defense: this.target.defense
+        }
+    }
 }
+
+export default Effect;
