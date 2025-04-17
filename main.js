@@ -1,10 +1,11 @@
 import Player from "./src/scripts/Player/player.js";
 import {Weapon, Armor} from "./src/scripts/equipment.js";
 import Battle from "./src/scripts/Scenes/battle.js";
+import Dungeon from "./src/scripts/Scenes/dungeon.js";
 
 import {characters, getCharacterByRole } from "./src/data/characters.js";
 import {enemies, getEnemyByName} from "./src/data/enemies.js";
-import {armors, getArmorByName} from "./src/data/equipments.js";
+import {armors, getArmor, getWeapon} from "./src/data/equipments.js";
 
 const game = document.querySelector(".game");
 
@@ -64,7 +65,8 @@ class Main{
         document.querySelectorAll(".player-options > p").forEach((player, i) => {
             player.addEventListener("click", () => {
                 // Equip the obliterator (uncomment for...... Idk)
-                const starterSet = new Armor(getArmorByName("Starter Set"));
+                const starterSet = new Armor(getArmor("starter_set"));
+                const starterWeapon = new Weapon(getWeapon("iron_pole"))
 
                 this.player = new Player(characters[i]); 
                 this.player.equipArmor(starterSet);
@@ -102,15 +104,24 @@ class Main{
      * The players options
      */
     setPreFight(){
-
-        game.innerHTML = this.player.showStats() + `<button class="fight-option button">Fight</button>`;
+        game.innerHTML = this.player.showStats() + `<button class="fight-option button">Fight</button> <button class="dungeon-option"> Dungeon Demo </button>`;
 
         const fightBtn = document.querySelector(".fight-option");
+        const dungeonBtn = document.querySelector(".dungeon-option");
         
         fightBtn.addEventListener("click", () => {
             const battle = new Battle();
             battle.init(this, game, this.player, this.difficulty);
         })
+
+        dungeonBtn.addEventListener("click", () => {
+            const dungeon = new Dungeon(this, game);
+            dungeon.init();
+        })
+    }
+
+    setDungeon(){
+
     }
 }
 
