@@ -104,6 +104,52 @@ const effects = [
         },
 
         next: null
+    },
+    {
+        name: "Dazed",
+        id: "daze",
+        icon: "🤨",
+
+        description: "Reduces Defense and Attack by 10%",
+        properties: {
+            damage: 0,
+            regeneration: 0,
+
+            stat_effects: {
+                health: 1,
+                power: 1,
+                defense: 1,
+                energy: 1
+            },
+
+            elemental_resistances : null,
+        },
+
+        next: null
+    },
+    {
+        name: "Stunned",
+        id: "stunned",
+        icon: "😵",
+        type: "stun",
+        
+        description: "Makes either the player or enemy lose a turn",
+
+        properties: {
+            damage: 0,
+            regeneration: 0,
+    
+            stat_effects: {
+                health: 1,
+                power: 1,
+                defense: 0.5,
+                energy: 1
+            },
+
+            elemental_resistances: null,
+        },
+
+        next: null
     }
 ]
 
