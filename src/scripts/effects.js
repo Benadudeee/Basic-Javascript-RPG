@@ -24,7 +24,7 @@ class Effect{
 
     apply(){
         let output = (this.type === "damage")? this.properties.damage : this.properties.regeneration;
-        
+        this.turns -= 1;
         // console.log(output, this.properties.damage);
         return output;
 

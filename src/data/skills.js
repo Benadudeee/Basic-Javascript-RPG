@@ -1,4 +1,4 @@
-import Skill from "../classes/skill.js";
+import Skill from "../scripts/skill.js";
 
 const skills = [
     {
@@ -68,7 +68,7 @@ const skills = [
         cost: 25,
 
         effects: [
-            {status: "discombobulated", chance: 0.4},
+            {status: "calamity2", chance: 0.4, turns: 3},
         ]
     },
 ]

@@ -46,7 +46,7 @@ class Armor{
         player.power = Math.round(player.basePower * this.powerMultiplier);
         player.defense = Math.round(player.baseDefense * this.defenseMutiplier);
         player.energy = Math.round(player.baseEnergy * this.energyMultiplier);
-
+        
         player.maxHealth = Math.round(player.baseHealth * this.healthMultiplier);
         player.maxPower = Math.round(player.basePower * this.powerMultiplier);
         player.maxDefense = Math.round(player.baseDefense * this.defenseMutiplier);

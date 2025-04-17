@@ -1,4 +1,4 @@
-import Entity from "./entity.js";
+import Entity from "../entity.js";
 
 // TODO: Implement decision script (If possible)
 class Enemy extends Entity{
@@ -15,6 +15,10 @@ class Enemy extends Entity{
             <p>Defense: ${this.defense}</p>
          </section>`
     }
+}
+
+class EnemyBehavior {
+    
 }
 
 

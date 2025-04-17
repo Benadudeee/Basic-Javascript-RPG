@@ -1,5 +1,5 @@
-import Enemy from "./enemy.js";
-import Player from "./player.js";
+import Enemy from "./Enemies/enemy.js";
+import Player from "./Player/player.js";
 import Effect from "./effects.js";
 
 import { effects, getEffectById } from "../data/effects.js";
