@@ -75,9 +75,9 @@ const weapons = [
  * Gets the data of the skill by it's name
  * @param {*} name 
  */
-function getArmorByName(name){
+function getArmor(id){
     for(const armor of armors){
-        if(armor.name === name){
+        if(armor.id === id){
             return armor;
         }
     }
@@ -85,9 +85,9 @@ function getArmorByName(name){
     return {};
 }
 
-function getWeaponByName(name){
+function getWeapon(id){
     for(const weapon of weapons){
-        if(weapon.name === name){
+        if(weapon.id === id){
             return weapon;
         }
     }
@@ -95,4 +95,4 @@ function getWeaponByName(name){
     return {};
 }
 
-export { armors, weapons, getArmorByName, getWeaponByName};
+export { armors, weapons, getArmor, getWeapon};

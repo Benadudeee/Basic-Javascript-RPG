@@ -53,13 +53,6 @@ class Armor{
         player.maxEnergy = Math.round(player.baseEnergy * this.energyMultiplier);
     }
 
-    // changeEquip = function(armorname){
-    //     curArmor = armorname;
-    //     armor.statBoost();
-
-    //     sys.setPreFight(curPlayer, area);    
-    // }
-
 }
 
 export { Weapon, Armor }
