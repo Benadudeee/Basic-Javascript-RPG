@@ -13,6 +13,7 @@ import { effects, getEffectById } from "../data/effects.js";
 class Skill{
     constructor(data){
         this.name = data.name;
+        this.description = data.description;
         this.type = data.type;
         this.value = data.value;
         this.cost = data.cost;
@@ -20,11 +21,6 @@ class Skill{
         this.effects = data.effects; // {effect, chance}
     }
 
-    // critMultiplier(){
-    //     let multiplier = 1;
-
-    //     return multiplier;
-    // }
     calcDamage(self, target, difficulty = null){
         const max = 1.2;
         const min = 0.8;
