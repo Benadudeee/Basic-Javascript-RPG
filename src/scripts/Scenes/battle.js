@@ -36,12 +36,13 @@ class Battle{
         this.playerEventActive = false; // If the player choose a move. Prevents spamming
     }
 
-    init(main, element, player, difficulty){
-        const enemy = new Enemy(enemies[Math.floor(Math.random() * enemies.length)]);
+    init(main, element, player, difficulty, enemy = null){
+
+        const genEnemy = (enemy === null)? new Enemy(enemies[Math.floor(Math.random() * enemies.length)]) : enemy;
 
         this.main = main;
         this.player = player;
-        this.enemy = enemy;
+        this.enemy = genEnemy;
         this.difficulty = difficulty;
         this.element = element;
 
@@ -54,13 +55,18 @@ class Battle{
     // NOTE: NEED TO REWORK THIS
     renderUI(){
         // this.element.innerHTML = this.player.showStats() + this.player.showSkills() + this.enemy.showStats();
-        this.element.innerHTML = this.player.showStats() + `<div class="player-skills-container"> </div>` + this.enemy.showStats();
+        this.element.innerHTML = this.player.showStats() + `<div class="player-skills-container"> </div>` + this.enemy.showStats() + `<div class="description-container"> </div>`;
         
         const playerOptions = document.querySelector(".player-skills-container");
 
         this.renderSkillBtns(playerOptions);
         this.renderRechargeBtn(playerOptions);
         this.renderHoverEffects();
+    }
+
+    updateEntities(){
+        this.playerElem.innerHTML = this.player.showStats();
+        this.enemyElem.innerHTML = this.enemy.showStats();
     }
 
     renderSkillBtns(elem){
@@ -95,8 +101,35 @@ class Battle{
     
     renderHoverEffects(){
         const buttons = document.querySelectorAll(".player-skills-container button");
+        const description = document.querySelector(".description-container")
         // Plan to do something with this.
-        buttons.forEach( (button, i) => button.addEventListener("mouseover", (e) =>  console.log(`Hovering on skill: ${this.player.skills[i].name}`)));
+        buttons.forEach( (button, i) => button.addEventListener("mouseover", (e) => {
+            if(button.innerText !== "Recharge" && this.playerEventActive == false){
+                const skill = this.player.skills[i];
+
+                description.innerHTML = `
+                    <h4> ${skill.name} </h4>
+                    <p> ${skill.description} </p>
+                    <br>
+                    <p>Power: ${skill.value} </p>
+
+                    ${ (skill.effects.length > 0)? 
+                        `
+                        <div class="description-effects">
+                            ${skill.effects.map(eff => `<p> Effect: ${eff.status} Chance: ${eff.chance * 10} Turns: ${eff.turns}`)}
+                        </div>`: ``}`
+            }
+
+            console.log(this.playerEventActive);
+        }));
+
+        buttons.forEach( button => button.addEventListener("mouseout", (e) => {
+            description.innerHTML = "";
+        }) )
+    }
+
+    showDescription(){
+
     }
     
     /**
@@ -137,26 +170,26 @@ class Battle{
         this.showOutput(this.playerElem, amountRecharged, "recharge");
         await utils.wait(1000);
 
-        this.enemyMove();
-        await utils.wait(1000);
-        
+        await this.enemyMove();
+    
+        this.playerEventActive = false;    
         this.checkBattleHasEnded();
     }
 
     
-    getTotalOutput(effects){
+    getTotalEffOutput(effects){
         let total = 0;
         effects.forEach(eff => total += eff.apply());
         
         return total;
     }
     async applyEffects(target, type) {
-        let totalDmgOutput = 0;
         if(target.effects.length == 0){
             return;
         }
-        
         target.effects = target.effects.filter( (eff) => eff.turns > 0 );
+
+        let totalDmgOutput = this.getTotalEffOutput(target.effects);
         target.health -= totalDmgOutput;
         
         const element = document.querySelector(`.${type}-stats`);
@@ -171,10 +204,8 @@ class Battle{
 
     async playerMove(skill){
         const skillOutput = skill.execute(this.player, this.enemy, this.difficulty);
+        this.updateEntities();
         
-        this.playerElem.innerHTML = this.player.showStats();
-        this.enemyElem.innerHTML = this.enemy.showStats();
-
         if(skill.type === "damage"){
             this.showOutput(this.enemyElem, skillOutput.amount, skillOutput.type);
         }else if(skill.type === "heal"){
@@ -182,23 +213,21 @@ class Battle{
         }
 
         await utils.wait(1000);
-        this.checkBattleHasEnded();
+        return this.checkBattleHasEnded();
     }
     
     /**
      * Helper function for the enemy to attack the player
      * @param {*} e The attacking enemy
-     */
-    async enemyMove(){
-        const enemySkill = this.enemy.skills[Math.floor(Math.random() * this.enemy.skills.length)];
-        const skillOutput = enemySkill.execute(this.enemy, this.player, this.difficulty);
-
-        this.playerElem.innerHTML = this.player.showStats();
-
+    */
+   async enemyMove(){
+       const enemySkill = this.enemy.skills[Math.floor(Math.random() * this.enemy.skills.length)];
+       const skillOutput = enemySkill.execute(this.enemy, this.player, this.difficulty);
+       
+        this.updateEntities();
         // Type Checker (When enemy can heal)
         this.showOutput(this.playerElem, skillOutput.amount, skillOutput.type);
-        this.playerEventActive = false;
-
+        
         await utils.wait(1000);
         this.checkBattleHasEnded();
     }
@@ -206,16 +235,26 @@ class Battle{
     // Whenever a player casts a skill
     // @return If the battle has ended or not (Might return other info later on)
     async startTurnCycle(skill){
-        // I'm just using op armor, this will soon be removed
-        await this.playerMove(skill);
-        await this.applyEffects(this.player, "player");
+        /* 
+           These all return whether the battle has ended, so it 
+           prevents any of these functions whether a player/enemy
+           lost the game
+        */
+        const description = document.querySelector(".description-container");
+        description.innerHTML = "";
+
+        if(await this.playerMove(skill)) return; // Might change name
+
+        if(await this.applyEffects(this.player, "player")) return;
  
-        await this.enemyMove();
-        await this.applyEffects(this.enemy, "enemy");
+        if(await this.enemyMove()) return;
+
+        if(await this.applyEffects(this.enemy, "enemy")) return;
  
+        this.playerEventActive = false;
         // this.renderUI();
     }
-
+    
     /**
      * Helper to determine if the battle has ended
      * 
@@ -238,6 +277,8 @@ class Battle{
 
             }
         }
+
+        return this.isEnd;
     }
 }
 
