@@ -1,5 +1,5 @@
-import Entity from "../entity.js";
-import { characters, getCharacterByRole } from "../../data/characters.js";
+import Entity from "../core/entity.js";
+import { characters, getCharacterByRole } from "./player-data.js";
 
 class Player extends Entity{
     constructor(data){

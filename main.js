@@ -1,11 +1,11 @@
-import Player from "./src/scripts/Player/player.js";
-import {Weapon, Armor} from "./src/scripts/equipment.js";
-import Battle from "./src/scripts/Scenes/battle.js";
-import Dungeon from "./src/scripts/Scenes/dungeon.js";
+import Player from "./src/Player/player.js";
+import {Weapon, Armor} from "./src/Items/equipment.js";
+import Battle from "./src/Scenes/Battle/battle.js";
+import Dungeon from "./src/Scenes/dungeon.js";
 
-import {characters, getCharacterByRole } from "./src/data/characters.js";
-import {enemies, getEnemyByName} from "./src/data/enemies.js";
-import {armors, getArmor, getWeapon} from "./src/data/equipments.js";
+import {characters, getCharacterByRole } from "./src/Player/player-data.js";
+import {enemies, getEnemyByName} from "./src/Enemies/enemy-data.js";
+import {armors, getArmor, getWeapon} from "./src/Items/equipments.js";
 
 const game = document.querySelector(".game");
 

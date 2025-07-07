@@ -1,8 +1,8 @@
-import Enemy from "./Enemies/enemy.js";
-import Player from "./Player/player.js";
-import Effect from "./effects.js";
+import Enemy from "../Enemies/enemy.js";
+import Player from "../Player/player.js";
+import Effect from "../Effects/effects.js";
 
-import { effects, getEffectById } from "../data/effects.js";
+import { effects, getEffectById } from "../Effects/effect-data.js";
 /**
  * ====== SKILLS ======
  * 
@@ -24,22 +24,20 @@ class Skill{
     calcDamage(self, target, difficulty = null){
         const max = 1.2;
         const min = 0.8;
-        let difficultyMult = 1;
 
 
-        const randomMultiplier = Math.random() * (max - min) + min;
+        const variation = Math.random() * (max - min) + min;
 
         // Change the mod depending on whos attacking
         if(difficulty !== null && self instanceof Player){
-            return Math.round(self.power * this.value * randomMultiplier * difficulty.enemyDamageMod / target.defense)
-
+            return Math.round(self.power * this.value * variation * difficulty.enemyDamageMod / target.defense)
         }
         
         if(difficulty !== null && self instanceof Enemy){
-            return Math.round(self.power * this.value * randomMultiplier * difficulty.playerDamageMod / target.defense);
+            return Math.round(self.power * this.value * variation * difficulty.playerDamageMod / target.defense);
         }
 
-        return Math.round(self.power * this.value * randomMultiplier / target.defense);
+        return Math.round(self.power * this.value * variation / target.defense);
     }
 
     // Difficulty to implement later

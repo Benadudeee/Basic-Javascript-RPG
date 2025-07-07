@@ -1,10 +1,10 @@
-import Player from "../Player/player.js";
-import Enemy from "../Enemies/enemy.js";
-import Effect from "../effects.js";
-import utils from "../Utilities/utils.js";
+import Player from "../../Player/player.js";
+import Enemy from "../../Enemies/enemy.js";
+import Effect from "../../Effects/effects.js";
+import utils from "../../Utilities/utils.js";
 
-import {enemies, getEnemyByName} from "../../data/enemies.js"
-import {effects, getEffectById} from "../../data/effects.js";
+import {enemies, getEnemyByName} from "../../Enemies/enemy-data.js";
+import {effects, getEffectById} from "../../Effects/effect-data.js";
 
 
 // TODO: Rework update to update select components (userUI, enemyUI) to make 
@@ -183,6 +183,7 @@ class Battle{
         
         return total;
     }
+    
     async applyEffects(target, type) {
         if(target.effects.length == 0){
             return;

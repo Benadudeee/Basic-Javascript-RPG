@@ -1,4 +1,4 @@
-import Entity from "../entity.js";
+import Entity from "../core/entity.js";
 
 // TODO: Implement decision script (If possible)
 class Enemy extends Entity{

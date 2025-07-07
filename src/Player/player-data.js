@@ -1,4 +1,4 @@
-import { skills, getSkillByName } from "./skills.js";
+import { skills, getSkillByName } from "../Skills/skill-data.js";
 
 const characters = [
     {
