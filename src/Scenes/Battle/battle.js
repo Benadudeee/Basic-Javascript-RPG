@@ -1,9 +1,9 @@
 import Player from "../../Player/player.js";
-import Enemy from "../../Enemies/enemy.js";
+import Enemy from "../../Enemies/base.js";
 import Effect from "../../Effects/effects.js";
 import utils from "../../Utilities/utils.js";
 
-import {enemies, getEnemyByName} from "../../Enemies/enemy-data.js";
+import {enemies, getEnemyById} from "../../Enemies/enemy-data.js";
 import {effects, getEffectById} from "../../Effects/effect-data.js";
 
 
