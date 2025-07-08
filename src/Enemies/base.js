@@ -1,6 +1,7 @@
 import Entity from "../core/entity.js";
 
 // TODO: Implement decision script (If possible)
+
 class Enemy extends Entity{
     constructor(data){
         super(data);
@@ -17,10 +18,8 @@ class Enemy extends Entity{
     }
 }
 
-class EnemyBehavior {
-    
-}
 
 
 
-export default Enemy;
+
+export default { Enemy };

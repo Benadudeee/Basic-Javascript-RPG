@@ -1,4 +1,4 @@
-import { skills, getSkillByName } from "../Skills/skill-data.js";
+import { skills } from "../Skills/skill-data.js";
 
 const characters = [
     {
@@ -7,29 +7,23 @@ const characters = [
         energy: 20,
         power: 25,
         defense: 12,
-        level: 1,
-
-        skills: [
-            getSkillByName("Attack"),
-            getSkillByName("Barrage"),
-            getSkillByName("Smash")
-        ]
-    },
-    {
-        name: "mage",
-        health: 105,
-        energy: 55,
-        power: 25,
-        defense: 12,
-        level: 1,
-
-        skills: [
-            getSkillByName("Heal"),
-            getSkillByName("Fireball"),
-            getSkillByName("Annihilation"),
-            getSkillByName("Thunder"),
-        ]
+        level: 1
     }
+    // {
+    //     name: "mage",
+    //     health: 105,
+    //     energy: 55,
+    //     power: 25,
+    //     defense: 12,
+    //     level: 1,
+
+    //     skills: [
+    //         getSkillByName("Heal"),
+    //         getSkillByName("Fireball"),
+    //         getSkillByName("Annihilation"),
+    //         getSkillByName("Thunder"),
+    //     ]
+    // }
     
 ]
 
