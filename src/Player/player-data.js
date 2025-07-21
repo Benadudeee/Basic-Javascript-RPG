@@ -1,4 +1,4 @@
-import { skills } from "../Skills/skill-data.js";
+import { getSkillById, skills } from "../Skills/skill-data.js";
 
 const characters = [
     {
@@ -7,7 +7,11 @@ const characters = [
         energy: 20,
         power: 25,
         defense: 12,
-        level: 1
+        level: 1,
+
+        skills: [
+            getSkillById("_attack")
+        ]
     }
     // {
     //     name: "mage",

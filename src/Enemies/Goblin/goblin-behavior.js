@@ -12,17 +12,7 @@ export class GoblinBehavior{
             return this.entity.skills.bigAttack;
         }
 
-        // if(this.battle === null){
-        //     return {"data" : "not in battle"}
-        // }
-
-        // const turnMod = this.battle.turns % 3;
-
-        // if(turnMod == 0){
-        //     return this.entity.skills.attack;
-        // }
-
-        return {"data" : "get random skill"};
+        return this.entity.skills.attack;
     }
 }
 

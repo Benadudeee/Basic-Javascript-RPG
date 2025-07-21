@@ -1,4 +1,5 @@
-import { skills } from "../Skills/skill-data.js";
+import { getSkillById, skills } from "../Skills/skill-data.js";
+import { DamageSkill, HealSkill } from "../Skills/skills.js";
 
 const enemies = [
     {
@@ -8,19 +9,25 @@ const enemies = [
         power: 15,
         defense: 10,
         level: 1,
-    },
-    // {
-    //     name: "cheif goblin",
-    //     health: 315,
-    //     power: 25,
-    //     defense: 22,
-    //     level: 1,
 
-    //     skills: [
-    //         getSkillByName("Attack"),
-    //         getSkillByName("Smash")
-    //     ]
-    // }
+        skills: {
+            attack: getSkillById("_attack"),
+            bigAttack: getSkillById("_big_attack")
+        }
+    },
+    {
+        name: "orc",
+        i: "_orc",
+        health: 315,
+        power: 25,
+        defense: 22,
+        level: 1,
+
+        skills: {
+            attack: getSkillById("_attack"),
+            bigAttack: getSkillById("_big_attack")
+        }
+    }
 ]
 
 

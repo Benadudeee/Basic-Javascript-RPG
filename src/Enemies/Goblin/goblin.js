@@ -1,9 +1,6 @@
-import Enemy from "../base.js";
-import Entity from "../../core/entity.js";
+import Enemy from "../base-enemy.js";
 import { getEnemyById } from "../enemy-data.js";
-
 import { GoblinBehavior } from "./goblin-behavior.js";
-import { Attack, BigAttack } from "../../Skills/skills.js";
 
 /**
  * First Enemy in game
@@ -13,23 +10,16 @@ import { Attack, BigAttack } from "../../Skills/skills.js";
  */
 
 const data = getEnemyById('_goblin');
-console.log(data.name)
 
-class Goblin extends Entity{
+class Goblin extends Enemy{
     constructor(){
         super(data);
         this.img = "";
 
-        this.skills = {
-            attack: new Attack(),
-            bigAttack: new BigAttack(),
-            // revUp : new RevUp(),
-        };
-
         this.behavior = new GoblinBehavior(this);
     }
 
-    foo(){
+    decideAttack(){
         if(this.behavior !== null) return this.behavior.decideMove();
     }
 }

@@ -2,94 +2,60 @@ import {Skill} from "./skills.js";
 
 const skills = [
     {
-     name: "Attack",
-     id: "_attack",
-     type: "damage",
-     description: "A quick and forceful strike that deals light damage.",
-  
-     value: 10,
-     cost: 3,
-  
-     effects: [],
-     self_effect: null,
+        name: "Attack",
+        id: "_attack",
+        type: "damage",
+        description: "A quick and forceful strike that deals light damage.",
+    
+        value: 10,
+        cost: 3,
+        target: "entity",
+        
+        effects: [],
   
     },
-    // {
-    //   name: "Smash",
-    //   type: "damage",
-    //   description: "A quick and forceful strike that deals light damage.",
+    {
+        name: "Rev Up",
+        id: "_big_attack",
+        type: "damage",
+        description: "A Big attack",
 
-    //   value: 15,
-    //   cost: 3,
+        value: 20,
+        cost: 5,
+        target: "entity",
 
-    //   effects: [],
-    //   self_effect: null,
+        effects: null,
+        buffs: null,
+        debuffs: null
+    },
+    {
+        name: "Rev Up",
+        id: "_rev_up",
+        type: "buff",
+        description: "Gains 2x the attack",
 
-    // },
-    // {
-    //   name: "Heal",
-    //   type: "heal",
-    //   description: "Heal yourself",
+        value: 0,
+        cost: 2,
+        target: "self",
 
-    //   value: 25,
-    //   cost: 10,
+        effects: [
 
-    //   effects: [],
-    //   self_effect: null,
+        ],
+    },
+    {
+        name: "Heal",
+        id: "_heal",
+        description: "Heals a good amount of hp",
 
-    // },
-    // {
-    //   name: "Barrage",
-    //   type: "damage",
-    //   description: "A flurry of rapid attacks that deals moderate damage.",
+        value: 30,
+        cost: 5,
+        target: "self",
 
-    //   value: 20,
-    //   cost: 7,
-
-    //   effects: [],
-    //   self_effect: null,
-
-    // },
-    // {
-    //   name: "Fireball",
-    //   type: "damage",
-    //   description: "Launch a blazing fireball that scorches enemies for heavy damage.",
-
-    //   value: 35,
-    //   cost: 12,
-
-    //   effects: [],
-    //   self_effect: null,
-
-    // },
-    // {
-    //   name: "Thunder",
-    //   type: "damage",
-    //   description: "Call down a bolt of lightning that deals damage and may stun the target.",
-
-    //   value: 10,
-    //   cost: 8,
-
-    //   effects: [
-    //     { status: "stunned", chance: 0.2, turns: 1 }
-    //   ],
-    //   self_effect: null,
-
-    // },
-    // {
-    //   name: "Annihilation",
-    //   type: "damage",
-    //   description: "Unleash devastating power that deals massive damage and may afflict the enemy with a deadly curse.",
-
-    //   value: 70,
-    //   cost: 25,
-
-    //   effects: [
-    //     { status: "calamity2", chance: 0.4, turns: 3 }
-    //   ],
-    //   self_effect: null
-    // }
-  ]
+        effects: null,
+        buffs: null,
+        debuffs: null
+    }
+]
 
 /**
  * Gets the data of the skill by it's name

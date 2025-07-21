@@ -15,6 +15,8 @@ class Player extends Entity{
         this.maxDefense = data.defense;
         this.maxEnergy = data.energy;
 
+        this.skills = data.skills;
+        
         // To implement later
         this.weapons = [];
         this.armour = [];
@@ -26,17 +28,6 @@ class Player extends Entity{
 
     recharge(){
         this.energy = this.baseEnergy;
-    }
-
-    showStats(){
-        return (
-        `   <section class="player-stats">
-                <h3>${this.name}</h3>
-                <p>Health: ${this.health} / ${this.maxHealth}</p>
-                <p>Energy: ${this.energy} / ${this.maxEnergy}</p>
-                <p>Power: ${this.power}</p>
-                <p>Defense: ${this.defense}</p>
-            </section>`)
     }
 
     /**
